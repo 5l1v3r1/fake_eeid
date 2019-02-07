@@ -1,5 +1,8 @@
 #!/usr/local/bin/python3
 
+import datetime
+import random
+
 #TODO Test for g2_weight case
 #TODO Test for ctr == 0 case
 #TODO Random gen
@@ -14,10 +17,31 @@ def control(id_no_ctr, weight):
         ctr %= 11
 
     return ctr
-    
+
+def rand_id():
+
+    d1 = datetime.datetime.strptime('1/1/1800', '%m/%d/%Y')
+    d2 = datetime.datetime.strptime('12/31/2199', '%m/%d/%Y')
+
+    print(random_date(d1,d2))
+
+    sex_century = random.randrange(1,8)
+    year        = random.randrange(0,99)
+    month       = random.randrange(1,12)
+    date        = 3 
+    serial      = 29 
+     
+def random_date(start, end):
+    delta = end - start
+    delta = random.randrange(delta.days)
+
+    return delta
  
 def main():
-    
+
+    rand_id()
+
+
     sex_century = 3
     year        = 76 
     month       = 5 

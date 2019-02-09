@@ -6,10 +6,8 @@ from datetime import timedelta
 from random import randint
 import weights
 
-#TODO Test for g2_weight case
-#TODO Test for ctr == 0 case / 5711030188
-#TODO Random gen
-
+# TODO Finding G2 id control = 10
+# TODO Readme.md
 
 def control(ee_id_no_control):
 

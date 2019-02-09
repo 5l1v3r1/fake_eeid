@@ -2,6 +2,7 @@
 
 import datetime
 import random
+from datetime import timedelta
 
 #TODO Test for g2_weight case
 #TODO Test for ctr == 0 case
@@ -32,15 +33,16 @@ def rand_id():
     serial      = 29 
      
 def random_date(start, end):
-    delta = end - start
-    delta = random.randrange(delta.days)
+    range_td = end - start
+    range_i = random.randrange(range_td.days)
 
-    return delta
+    delta = timedelta(days = range_i)
+
+    return delta + start
  
 def main():
 
     rand_id()
-
 
     sex_century = 3
     year        = 76 

@@ -3,6 +3,7 @@
 import datetime
 import random
 from datetime import timedelta
+from random import randint
 
 #TODO Test for g2_weight case
 #TODO Test for ctr == 0 case
@@ -24,13 +25,22 @@ def rand_id():
     d1 = datetime.datetime.strptime('1/1/1800', '%m/%d/%Y')
     d2 = datetime.datetime.strptime('12/31/2199', '%m/%d/%Y')
 
-    print(random_date(d1,d2))
+    rand_date = random_date(d1,d2)
 
-    sex_century = random.randrange(1,8)
-    year        = random.randrange(0,99)
-    month       = random.randrange(1,12)
-    date        = 3 
-    serial      = 29 
+    print(rand_date)
+
+    sex_century = (int(rand_date.year / 100) - 17) * 2 - randint(0, 1)
+    year        = rand_date.year % 100
+    month       = rand_date.month
+    date        = rand_date.day
+    serial      = random.randrange(0,999)
+
+    ee_id_no_control = str(sex_century) + str(year) + str(month).zfill(2) + str(date).zfill(2) \
+                        + str(serial).zfill(3) 
+
+    print(ee_id_no_control)
+    
+    return ee_id_no_control
      
 def random_date(start, end):
     range_td = end - start
@@ -42,17 +52,17 @@ def random_date(start, end):
  
 def main():
 
-    rand_id()
+    rand_id_no_ctr = rand_id()
 
+    # Test data
     sex_century = 3
     year        = 76 
     month       = 5 
     date        = 3 
     serial      = 29 
-    # control     = 8
-    
-    ee_id_no_control = str(sex_century) + str(year) + str(month).zfill(2) + str(date).zfill(2) \
-                        + str(serial).zfill(3) 
+    # control     = 9
+
+    ee_id_no_control = rand_id_no_ctr
     
     print(ee_id_no_control)
     

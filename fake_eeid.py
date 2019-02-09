@@ -4,12 +4,31 @@ import datetime
 import random
 from datetime import timedelta
 from random import randint
+import weights
 
 #TODO Test for g2_weight case
 #TODO Test for ctr == 0 case / 5711030188
 #TODO Random gen
 
-def control(id_no_ctr, weight):
+
+def control(ee_id_no_control):
+
+    g1_weight = weights.g1
+    g2_weight = weights.g2
+    grade = 1
+    
+    ctr = calc_control(ee_id_no_control, g1_weight)
+
+    if ctr == 10:
+        ctr = calc_control(ee_id_no_control, g2_weight)
+        grade = 2
+
+        if ctr == 10:
+            ctr = 0
+
+    return ctr, grade
+
+def calc_control(id_no_ctr, weight):
     
     ctr = 0
 
@@ -30,8 +49,6 @@ def random_id(rand_date):
 
     ee_id_no_control = str(sex_century) + str(year) + str(month).zfill(2) + str(date).zfill(2) \
                         + str(serial).zfill(3) 
-
-    print(ee_id_no_control)
     
     return ee_id_no_control
      
@@ -49,34 +66,10 @@ def main():
     d2 = datetime.datetime.strptime('12/31/2199', '%m/%d/%Y')
 
     rand_d = random_date(d1, d2)
-
-
-    # Test data
-    sex_century = 3
-    year        = 76 
-    month       = 5 
-    date        = 3 
-    serial      = 29 
-    # control     = 9
-
     ee_id_no_control = random_id(rand_d)
     
-    print(ee_id_no_control)
+    ctr, grade = control(ee_id_no_control)
     
-    g1_weight = [1,2,3,4,5,6,7,8,9,1]
-    g2_weight = [3,4,5,6,7,8,9,1,2,3]
-
-    grade = 1
-    
-    ctr = control(ee_id_no_control, g1_weight)
-
-    if ctr == 10:
-        ctr = control(ee_id_no_control, g2_weight)
-        grade = 2
-
-    if ctr == 10:
-        ctr = 0
-
     ee_id = ee_id_no_control + str(ctr)
    
     print("Random Date     : ", rand_d)
@@ -85,4 +78,5 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+   main()
+    
